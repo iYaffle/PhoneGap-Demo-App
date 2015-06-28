@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+    <link rel="stylesheet" type="text/css" href="css/jquery.mmenu.all.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <title>PhoneGap Book Tutorial</title>
+    <style>
+        .btn-group-vertical > button {
+            margin-bottom: 10px;
+            border-radius: 10px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page">
+        <div class="header">
+            <a href="#menu"></a>
+            Capture API
+        </div>
+        <div class="content">
+            <div class="btn-group-vertical" role="group" aria-label="...">
+                <button onclick="captureAudio();" class="btn-lg btn-success">Capture Audio</button>
+                <br>
+                <button onclick="captureImage();" class="btn-lg btn-warning">Capture Image</button>
+                <br>
+                <button onclick="captureVideo();" class="btn-lg btn-danger">Capture Video</button>
+                <br>
+            </div>
+
+            <div id="details" style="display:none">
+                <b>File Path : </b> 
+                <div id="fullPath"></div>
+                <br/>
+                <b>File Name : </b> 
+                <div id="name"></div>
+                <br/>
+                <b>Type : </b> 
+                <div id="type"></div>
+                <br/>
+                <b>Last Modified Timestamp : </b> 
+                <div id="lastModifiedDate"></div>
+                <br/>
+                <b>File Size (bytes) : </b> 
+                <div id="size"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mmenu.min.all.js"></script>
+    <script type="text/javascript" src="js/fastclick.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script type="text/javascript">
+        function captureSuccess(mediaFiles) {
+            var i, len;
+            for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                uploadFile(mediaFiles[i]);
+            }
+        }
+
+         // Called if something bad happens.
+        function captureError(error) {
+            var msg = 'An error occurred during capture: ' + error.code;
+            navigator.notification.alert(msg, null, 'Uh oh!');
+        }
+
+         // A button will call this function
+        function captureAudio() {
+            $('#details').hide();
+
+            // Launch device audio recording application,
+            // allowing user to capture up to 1 audio clips
+            navigator.device.capture.captureAudio(captureSuccess, captureError, {
+                limit: 1,
+                duration: 10
+            });
+        }
+
+         // A button will call this function
+        function captureImage() {
+            $('#details').hide();
+
+            // Launch device camera application,
+            // allowing user to capture up to 1 images
+            navigator.device.capture.captureImage(captureSuccess, captureError, {
+                limit: 1
+            });
+        }
+
+        function captureVideo() {
+            $('#details').hide();
+
+            // Launch device video recording application,
+            // allowing user to capture up to 1 video clip
+            navigator.device.capture.captureVideo(captureSuccess, captureError, {
+                limit: 1,
+                duration: 10
+            });
+        }
+
+
+         // Upload files to server
+        function uploadFile(mediaFile) {
+            $('#fullPath').html(mediaFile.fullPath.replace(mediaFile.name, ""));
+            $('#name').html(mediaFile.name);
+            $('#type').html(mediaFile.type);
+            $('#lastModifiedDate').html(mediaFile.lastModifiedDate);
+            $('#size').html(mediaFile.size);
+            $('#details').show();
+            //Upload file using FileTransfer method not shown here
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+    <link rel="stylesheet" type="text/css" href="css/jquery.mmenu.all.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <title>PhoneGap Book Tutorial</title>
+
+    <style>
+        .btn-group-vertical > button {
+            margin-bottom: 10px;
+            border-radius: 10px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page">
+        <div class="header">
+            <a href="#menu"></a>
+            Notification API
+        </div>
+        <div class="content">
+            <br/>
+            <div class="btn-group-vertical" role="group" aria-label="...">
+                <button onclick="beepNow();" class="btn-lg btn-primary">Beep 3 Times</button>
+                <button onclick="vibrateNow();" class="btn-lg btn-info">Vibrate 1 Sec</button>
+                <button onclick="alertNow();" class="btn-lg btn-success">Alert Notify</button>
+                <button onclick="confirmNow();" class="btn-lg btn-warning">Confirm Notify</button>
+                <button onclick="promptNow();" class="btn-lg btn-danger">Prompt Notify</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mmenu.min.all.js"></script>
+    <script type="text/javascript" src="js/fastclick.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script type="text/javascript">
+        document.addEventListener('deviceready', onDeviceReady, false);
+
+        function onDeviceReady() {
+            //Do Something
+        }
+
+        function beepNow() {
+            navigator.notification.beep(3);
+        }
+
+        function vibrateNow() {
+            navigator.notification.vibrate(1000);
+        }
+
+        function alertNow() {
+            navigator.notification.alert(
+                'You got an alert now', // message
+                null, // callback
+                'Notifications API', // title
+                'Done' // buttonName
+            );
+
+        }
+
+        function confirmNow() {
+            navigator.notification.confirm(
+                'You like this app?', // message
+                onConfirm, // callback to invoke with index of button pressed
+                'App Feedback', // title
+                ['Yes', 'No'] // buttonLabels
+            );
+
+        }
+
+        function onConfirm(buttonIndex) {
+            alert('Button Selected : ' + buttonIndex);
+        }
+
+        function promptNow() {
+            navigator.notification.prompt(
+                'Please enter your name', // message
+                handleAction, // callback to invoke
+                'Registration', // title
+                ['Ok', 'Exit'], // buttonLabels
+                'Super Star Rajini' // defaultText
+            );
+
+            function handleAction(results) {
+                alert("You selected button " + results.buttonIndex + " with input '" + results.input1 + "'");
+            }
+
+        }
+    </script>
+</body>
+
+</html>

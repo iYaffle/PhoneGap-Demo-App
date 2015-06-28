@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.mmenu.all.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+
+    <title>
+        PhoneGap Book Tutorial
+    </title>
+</head>
+
+<body>
+    <div id="page">
+        <div class="header">
+            <a href="#menu">
+            </a>
+            Device API
+        </div>
+        <div class="content">
+
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    <h6 class="list-group-item-heading">
+              Device Model
+            </h6>
+                </a>
+                <a href="#" class="list-group-item">
+                    <p id="model" class="list-group-item-text">
+                    </p>
+                </a>
+            </div>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    <h6 class="list-group-item-heading">
+              Platform
+            </h6>
+                </a>
+                <a href="#" class="list-group-item">
+                    <p id="platform" class="list-group-item-text">
+                    </p>
+                </a>
+            </div>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    <h6 class="list-group-item-heading">
+              Version
+            </h6>
+                </a>
+                <a href="#" class="list-group-item">
+                    <p id="version" class="list-group-item-text">
+                    </p>
+                </a>
+            </div>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    <h6 class="list-group-item-heading">
+              Device UUID
+            </h6>
+                </a>
+                <a href="#" class="list-group-item">
+                    <p id="uuid" class="list-group-item-text">
+                    </p>
+                </a>
+            </div>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    <h6 class="list-group-item-heading">
+              Cordova Version
+            </h6>
+                </a>
+                <a href="#" class="list-group-item">
+                    <p id="cordova" class="list-group-item-text">
+                    </p>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="cordova.js">
+    </script>
+    <script type="text/javascript" src="js/jquery-2.1.3.min.js">
+    </script>
+    <script type="text/javascript" src="js/jquery.mmenu.min.all.js">
+    </script>
+    <script type="text/javascript" src="js/fastclick.js">
+    </script>
+    <script type="text/javascript" src="js/main.js">
+    </script>
+
+    <script type="text/javascript">
+        document.addEventListener('deviceready', onDeviceReady, false);
+
+        function onDeviceReady() {
+
+            $('#model').html(device.model);
+            $('#cordova').html(device.cordova);
+            $('#platform').html(device.platform);
+            $('#uuid').html(device.uuid);
+            $('#version').html(device.version);
+
+        }
+    </script>
+</body>
+
+</html>
