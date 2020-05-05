@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
     <title>PhoneGap Book Tutorial</title>
 </head>
-
+ 
 <body>
     <div id="page">
         <div class="header">
@@ -20,32 +20,38 @@
             Contacts API
         </div>
         <div class="content">
-
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#fetch" data-toggle="tab">Fetch</a>
-                </li>
-                <li><a href="#add" data-toggle="tab">Add</a>
-                </li>
-            </ul>
-
+            <div class="nav nav-tabs">
+                <a class="nav-item nav-link active" href="#fetch" data-toggle="tab">Fetch</a>
+                <a class="nav-item nav-link" href="#add" data-toggle="tab">Add</a>
+            </div>
             <div class="tab-content" id="tabs">
 
-                <div id="fetch" class="tab-pane active">
-                    <br/>
-                    <button onclick="fetchContacts('');" class="btn btn-info">Fetch 10 Contacts</button>
-                    <button id="searchName" class="btn btn-info">Search Name</button>
-                    <br/>
-                    <br/>
+                <div id="fetch" class="tab-pane show active">
+                    <br />
+
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group mr-2" role="group">
+                            <button onclick="fetchContacts('');" type="button" class="btn btn-primary">Fetch 10
+                                Contacts</button>
+                        </div>
+
+                        <div class="btn-group mr-2" role="group">
+                            <button id="searchName" type="button" class="btn btn-primary">Search Name</button>
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
                     <div id="status"></div>
 
                     <div id="panel" style="display:none">
                         <div class="list-group">
-                            <a href="#" class="list-group-item active">
-                                <h4 class="list-group-item-heading">Total Contacts</h4>
-                            </a>
-                            <a href="#" class="list-group-item">
+                            <div class="list-group-item active">
+                                <h5 class="list-group-item-heading">Total Contacts</h5>
+                            </div>
+                            <div class="list-group-item">
                                 <p id="count" class="list-group-item-text"></p>
-                            </a>
+                            </div>
                         </div>
 
                         <table class="table table-striped">
@@ -90,19 +96,19 @@
 
                     </form>
                 </div>
-				
+
             </div>
         </div>
 
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mmenu.min.all.js"></script>
+        <script type="text/javascript" src="js/jquery-3.5.0.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mmenu.all.js"></script>
         <script type="text/javascript" src="js/fastclick.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
         <script type="text/javascript">
-            $("#searchName").click(function() {
+            $("#searchName").click(function () {
                 $('#status').html("");
                 $('#panel').hide();
 
@@ -114,7 +120,7 @@
                 );
             });
 
-            $("#saveBtn").click(function() {
+            $("#saveBtn").click(function () {
                 var firstName = document.getElementById('firstName').value;
                 var lastName = document.getElementById('lastName').value;
                 var fullName = firstName + ' ' + lastName;
@@ -209,7 +215,8 @@
                     if (contacts[i].phoneNumbers) {
                         totalCount++;
                         for (var j = 0; j < contacts[i].phoneNumbers.length; j++) {
-                            text = text + '<tr><td>' + totalCount + "</td><td>" + contacts[i].displayName + "</td><td>" + contacts[i].phoneNumbers[j].value + "</td></tr>";
+                            text = text + '<tr><td>' + totalCount + "</td><td>" + contacts[i].displayName + "</td><td>" +
+                                contacts[i].phoneNumbers[j].value + "</td></tr>";
                         }
                     }
                 }

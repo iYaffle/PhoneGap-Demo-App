@@ -16,12 +16,12 @@
 
 <body>
     <div id="page">
-	
+
         <div class="header">
             <a href="#menu"></a>
             Splash Screen API
         </div>
-		
+
         <div class="content">
             <button onclick="showScreen();" class="btn-lg btn-primary">Show Splash Screen</button>
         </div>
@@ -29,14 +29,19 @@
     </div>
 
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-    <script type="text/javascript" src="js/jquery.mmenu.min.all.js"></script>
+    <script type="text/javascript" src="js/jquery-3.5.0.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mmenu.all.js"></script>
     <script type="text/javascript" src="js/fastclick.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 
     <script type="text/javascript">
         function showScreen() {
             navigator.splashscreen.show();
+
+            setTimeout(function () {
+                navigator.splashscreen.hide();
+            }, 1000);
         }
     </script>
 </body>

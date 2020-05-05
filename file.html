@@ -21,7 +21,7 @@
         </div>
         <div class="content">
             <div class="btn-group-vertical" role="group" aria-label="...">
-                <button class="btn-lg btn-success" onclick="readDirectory()">Get All Directories</button>
+                <button class="btn-lg btn-success" onclick="readDirectory()">Get Asset Directories</button>
             </div>
         </div>
 
@@ -29,22 +29,25 @@
     </div>
 
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-    <script type="text/javascript" src="js/jquery.mmenu.min.all.js"></script>
+    <script type="text/javascript" src="js/jquery-3.5.0.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mmenu.all.js"></script>
     <script type="text/javascript" src="js/fastclick.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 
     <script type="text/javascript">
         function readDirectory() {
-            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, doDirectoryListing, null);
+            listDir("file:///android_asset/");
         }
 
-
         function doDirectoryListing(fileSystem) {
+            var reader = fileSystem.createReader();
 
-            var dirReader = fileSystem.root.createReader();
+            reader.readEntries(gotDir, onError);
+        }
 
-            dirReader.readEntries(gotDir, onError);
+        function listDir(path) {
+            window.resolveLocalFileSystemURL(path, doDirectoryListing, onError);
         }
 
         function gotDir(entries) {
@@ -62,7 +65,7 @@
         }
 
         function onError(error) {
-            alert(error.code);
+            alert("Error Code : " + error.code);
         }
     </script>
 </body>
